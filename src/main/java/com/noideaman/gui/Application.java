@@ -17,12 +17,12 @@ public class Application {
 
     private static class FrameSynchronizer {
         private Frame capturedFrame;
-        synchronized Frame getSetCurrentFrame(Frame capturedFrame) {
-            if (capturedFrame == null) {
-                return this.capturedFrame;
-            }
-            this.capturedFrame = capturedFrame;
+        synchronized Frame getCurrentFrame() {
             return this.capturedFrame;
+        }
+
+        synchronized void setCurrentFrame(Frame capturedFrame) {
+            this.capturedFrame = capturedFrame;
         }
     }
 
@@ -37,7 +37,7 @@ public class Application {
         @Override
         public void run() {
             while (true) {
-                this.synchronizer.getSetCurrentFrame(capturer.captureFrame());
+                this.synchronizer.setCurrentFrame(capturer.captureFrame());
             }
         }
     }
@@ -54,7 +54,7 @@ public class Application {
         captureThread.start();
 
         while (true) {
-            Frame currentFrame = synchronizer.getSetCurrentFrame(null);
+            Frame currentFrame = synchronizer.getCurrentFrame();
 
             if (currentFrame != null) {
                 canvas.showImage(currentFrame);
