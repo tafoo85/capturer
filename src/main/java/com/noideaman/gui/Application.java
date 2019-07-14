@@ -17,7 +17,7 @@ public class Application {
 
     private static class FrameSynchronizer {
         private Frame capturedFrame;
-        public synchronized Frame getSetCurrentFrame(Frame capturedFrame) {
+        synchronized Frame getSetCurrentFrame(Frame capturedFrame) {
             if (capturedFrame == null) {
                 return this.capturedFrame;
             }
@@ -30,7 +30,7 @@ public class Application {
         private Capturer capturer;
         private FrameSynchronizer synchronizer;
 
-        public CaptureThread(Capturer capturer, FrameSynchronizer synchronizer) {
+        CaptureThread(Capturer capturer, FrameSynchronizer synchronizer) {
             this.capturer = capturer;
             this.synchronizer = synchronizer;
         }
@@ -100,13 +100,7 @@ public class Application {
     }
 
     private static PopupMenu createPopupMenu() {
-        PopupMenu menu =  new PopupMenu() {
-            FilterType filterType;
-
-            public void setFilterType(FilterType type) {
-                this.filterType = type;
-            }
-        };
+        PopupMenu menu =  new PopupMenu();
         Menu filterMenu = new Menu("Filters");
         Menu effectsMenu = new Menu("Effects");
 
@@ -119,11 +113,9 @@ public class Application {
             toAddTo.add(menuItem);
         };
 
-        FilterType.getFiltersByType(FilterType.FILTER_TYPE).stream()
-                .forEach(menuCreator);
+        FilterType.getFiltersByType(FilterType.FILTER_TYPE).forEach(menuCreator);
 
-        FilterType.getFiltersByType(FilterType.EFFECT_TYPE).stream()
-                .forEach(menuCreator);
+        FilterType.getFiltersByType(FilterType.EFFECT_TYPE).forEach(menuCreator);
 
         menu.add(filterMenu);
         menu.add(effectsMenu);
