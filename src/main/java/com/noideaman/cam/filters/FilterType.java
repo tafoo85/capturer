@@ -8,18 +8,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum FilterType {
-    BlackAndWhiteFilter("Black and White", 0, BlackWhiteFilter.class),
-    BlueFilter("Blue", 0, com.noideaman.cam.filters.color.BlueFilter.class),
-    GreenFilter("Green", 0, com.noideaman.cam.filters.color.GreenFilter.class),
-    RedFilter("Red", 0, com.noideaman.cam.filters.color.RedFilter.class),
-    NegativeFilter("Negative", 0, com.noideaman.cam.filters.color.NegativeFilter.class),
-    SepiaFilter("Sepia", 0, com.noideaman.cam.filters.color.SepiaFilter.class),
-    GrayScaleFilter("Gray Scale", 0, com.noideaman.cam.filters.color.GrayScaleFilter.class),
-    ColorScreenEffect("Color Screen", 1, ColorScreenFilter.class),
-    FunkyEffect("Funky", 1, FunkyFilter.class),
-    GhostEffect("Ghosting", 1, GhostFilter.class),
-    HorizontalMirrorEffect("Horizontal Mirror", 1, HorizontalMirror.class),
-    SinusoidalEffect("Sinusoidal", 1, com.noideaman.cam.filters.effects.SinusoidalEffect.class);
+    BlackAndWhiteFilter("Black and White", FilterType.FILTER_TYPE, BlackWhiteFilter.class),
+    BlueFilter("Blue", FilterType.FILTER_TYPE, com.noideaman.cam.filters.color.BlueFilter.class),
+    GreenFilter("Green", FilterType.FILTER_TYPE, com.noideaman.cam.filters.color.GreenFilter.class),
+    RedFilter("Red", FilterType.FILTER_TYPE, com.noideaman.cam.filters.color.RedFilter.class),
+    NegativeFilter("Negative", FilterType.FILTER_TYPE, com.noideaman.cam.filters.color.NegativeFilter.class),
+    SepiaFilter("Sepia", FilterType.FILTER_TYPE, com.noideaman.cam.filters.color.SepiaFilter.class),
+    GrayScaleFilter("Gray Scale", FilterType.FILTER_TYPE, com.noideaman.cam.filters.color.GrayScaleFilter.class),
+    ColorScreenEffect("Color Screen", FilterType.EFFECT_TYPE, ColorScreenFilter.class),
+    FunkyEffect("Funky", FilterType.EFFECT_TYPE, FunkyFilter.class),
+    GhostEffect("Ghosting", FilterType.EFFECT_TYPE, GhostFilter.class),
+    GuassianBlurEffect("Low Pass", FilterType.EFFECT_TYPE, BlurFilter.class),
+    HorizontalMirrorEffect("Horizontal Mirror", FilterType.EFFECT_TYPE, HorizontalMirror.class),
+    SinusoidalEffect("Trippy", FilterType.EFFECT_TYPE, TrippyEffect.class);
 
     private String displayName;
     private int displayType;

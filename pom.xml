@@ -11,18 +11,25 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <javacpp.version>1.5</javacpp.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-            <version>1.5</version>
+            <artifactId>opencv-platform</artifactId>
+            <version>4.1.0-1.5.1</version>
         </dependency>
         <dependency>
-            <artifactId>miglayout-swing</artifactId>
-            <groupId>com.miglayout</groupId>
-            <version>4.2</version>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>ffmpeg-platform</artifactId>
+            <version>4.1.3-1.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5.1</version>
         </dependency>
     </dependencies>
 
