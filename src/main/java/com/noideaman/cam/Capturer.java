@@ -22,10 +22,10 @@ public class Capturer {
     }
 
     public void init() {
-        grabber = new VideoInputFrameGrabber(0);
-        grabber.setImageHeight(720);
-        grabber.setImageWidth(1280);
         try {
+            grabber = FrameGrabber.createDefault(0);
+            grabber.setImageHeight(1920);
+            grabber.setImageWidth(1080);
             grabber.start();
         } catch (FrameGrabber.Exception e) {
             e.printStackTrace();

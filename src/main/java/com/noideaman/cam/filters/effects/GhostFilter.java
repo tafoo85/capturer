@@ -9,6 +9,16 @@ import java.awt.image.BufferedImage;
 public class GhostFilter implements IFilter {
     private BufferedImage previousFrame;
 
+    protected double PREVIOUS_RED_WEIGHT = .9;
+    protected double PREVIOUS_GREEN_WEIGHT = .9;
+    protected double PREVIOUS_BLUE_WEIGHT = .9;
+    protected double PREVIOUS_ALPHA_WEIGHT = .9;
+
+    protected double CURRENT_RED_WEIGHT = .1;
+    protected double CURRENT_GREEN_WEIGHT = .1;
+    protected double CURRENT_BLUE_WEIGHT = .1;
+    protected double CURRENT_ALPHA_WEIGHT = .1;
+
     public GhostFilter() {
 
     }
@@ -38,10 +48,14 @@ public class GhostFilter implements IFilter {
                     int green = channel(currentPixel, GREEN_CHANNEL_MASK);
                     int blue = channel(currentPixel, BLUE_CHANNEL_MASK);
 
-                    int newRed = channel((int) (red * .1) + (int)(previousRed * .9), RED_CHANNEL_MASK);
-                    int newGreen = channel((int)(green * .1) + (int)(previousGreen * .9), GREEN_CHANNEL_MASK);
-                    int newBlue = channel((int)(blue * .1) + (int)(previousBlue * .9), BLUE_CHANNEL_MASK);
-                    int newAlpha = channel((int)(alpha * .1) + (int)(previousAlpha * .9), 0xff000000);
+                    int newRed = channel((int) (red * this.CURRENT_RED_WEIGHT) +
+                            (int)(previousRed * this.PREVIOUS_RED_WEIGHT), RED_CHANNEL_MASK);
+                    int newGreen = channel((int)(green * CURRENT_GREEN_WEIGHT) +
+                            (int)(previousGreen * PREVIOUS_GREEN_WEIGHT), GREEN_CHANNEL_MASK);
+                    int newBlue = channel((int)(blue * CURRENT_BLUE_WEIGHT) +
+                            (int)(previousBlue * PREVIOUS_BLUE_WEIGHT), BLUE_CHANNEL_MASK);
+                    int newAlpha = channel((int)(alpha * CURRENT_ALPHA_WEIGHT) +
+                            (int)(previousAlpha * PREVIOUS_ALPHA_WEIGHT), 0xff000000);
 
                     currentPixel = newAlpha + newRed + newGreen + newBlue;
                 }
